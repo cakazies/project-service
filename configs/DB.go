@@ -2,6 +2,7 @@ package configs
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	// this package for load mysql
@@ -27,7 +28,7 @@ func Connect() {
 	conn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local", user, password, host, port, dbname)
 	db, err := gorm.Open("mysql", conn)
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 	GetDB = db
 }

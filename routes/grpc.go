@@ -1,77 +1,77 @@
 package routes
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
+	"log"
+	"net"
+	ctr "project-service/controllers"
 	rpc "project-service/grpc"
-	"project-service/models"
+	"strconv"
 
-	"gopkg.in/go-playground/validator.v9"
+	"google.golang.org/grpc"
 )
 
 type (
-	// GrpcRoute struct for set this function
-	GrpcRoute struct{}
+	// ProjectServer struct for class this server
+	ProjectServer struct{}
 )
 
-// GetProjects function for get project
-func (GrpcRoute) GetProjects(paging *rpc.Pagination) []byte {
-	bniModel := models.ProjectModels{}
-	orderby := paging.ShortBy + " " + paging.Shortvalue
-	result, err := bniModel.GetProjects(paging.Query, paging.Limit, paging.Offset, orderby)
+// Run function is first time load
+func (ProjectServer) Run() {
+	srv := grpc.NewServer()
+	var garageSrv ProjectServer
+	rpc.RegisterProjectsServer(srv, garageSrv)
+	port := ":6001"
+	log.Println("Starting RPC server at", port)
+
+	l, err := net.Listen("tcp", port)
 	if err != nil {
-		fmt.Println(err)
+		log.Fatalf("could not listen to %s: %v", port, err)
 	}
-	data, err := json.Marshal(result)
-	return data
+	log.Fatal(srv.Serve(l))
 }
 
-// GetProject function for get detail per project and return byte
-func (GrpcRoute) GetProject(id string) []byte {
-	bniModel := models.ProjectModels{}
-	result, err := bniModel.GetProject(id)
-	if err != nil {
-		fmt.Println(err)
-	}
-	data, err := json.Marshal(result)
-	return data
+// List function for get all data
+func (ProjectServer) List(ctx context.Context, paging *rpc.Pagination) (*rpc.Reponse, error) {
+	grpc := ctr.GrpcRoute{}
+	result := grpc.GetProjects(paging)
+	var resp rpc.Reponse
+
+	resp.Data = string(result)
+	return &resp, nil
 }
 
-// Create function for get detail per project and return byte
-func (GrpcRoute) Create(data string) []byte {
-	var all models.ProjectAll
-	var resp models.Rest
+// Create function for get all data
+func (ProjectServer) Create(ctx context.Context, pro *rpc.Project) (*rpc.Reponse, error) {
+	grpc := ctr.GrpcRoute{}
+	data, _ := json.Marshal(pro)
+	result := grpc.Create(string(data))
+	var resp rpc.Reponse
 
-	v := validator.New()
-	err := json.Unmarshal([]byte(data), &all)
-	projectModel := models.ProjectModels{}
+	resp.Data = string(result)
+	return &resp, nil
+}
 
-	err = v.Struct(all)
-	if err != nil {
-		for _, e := range err.(validator.ValidationErrors) {
-			if e != nil {
-				resp.Code = 400
-				resp.Message = "Data `" + e.Field() + "` doesn't exist"
-				data, _ := json.Marshal(resp)
-				return data
-			}
-		}
-	}
+// Detail function for get detail data project
+func (ProjectServer) Detail(ctx context.Context, pro *rpc.Project) (*rpc.Reponse, error) {
+	grpc := ctr.GrpcRoute{}
+	idProject := strconv.Itoa(int(pro.Id))
+	result := grpc.GetProject(idProject)
+	var resp rpc.Reponse
 
-	// insert project and get ID project
-	dataProject, err := projectModel.InsertProject(all.Project)
-	if err != nil {
+	resp.Data = string(result)
+	return &resp, nil
+}
 
-	}
+// Edit function for update data project
+func (ProjectServer) Edit(ctx context.Context, pro *rpc.Project) (*rpc.Reponse, error) {
+	grpc := ctr.GrpcRoute{}
+	data, _ := json.Marshal(pro)
+	id := strconv.Itoa(int(pro.Id))
+	result := grpc.Edit(id, string(data))
+	var resp rpc.Reponse
 
-	all.ProjectDetail.ProjectID = int(dataProject.ID)
-	err = projectModel.InsertProjectDetail(all.ProjectDetail)
-	if err != nil {
-
-	}
-
-	resp.Code = 200
-	resp.Message = "Success"
-
-	return nil
+	resp.Data = string(result)
+	return &resp, nil
 }
