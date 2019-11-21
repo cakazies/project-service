@@ -15,8 +15,8 @@ func initEnv() {
 	}
 }
 
-// this function for load in first time, for beauty command line, and link for make it
-func InitAscii() {
+// InitASCII this function for load in first time, for beauty command line, and link for make it
+func InitASCII() {
 	initEnv()
 	fmt.Println(`
 ____________ _____   ___ _____ _____ _____      _____ ___________ _   _ _____ _____  _____ 
