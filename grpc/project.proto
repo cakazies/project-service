@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package project;
+// import "google/protobuf/Empty.proto";
+
+message Project {
+    int32  id = 1;
+    string name = 2;
+    string goal = 3;
+    string price = 4;
+    string risk = 5;
+    string duration = 6;
+    string rate = 7;
+    string cbenefit = 8;
+    string status = 9;
+    string scheme = 10;
+    bool hidden = 11;
+    int32 category_id = 12;
+    int32 created_by = 13;
+    int32 project_id = 14;
+    string description = 15;
+    string address = 16;
+    string start_period = 17;
+    string failed_date = 18;
+    string ongoing_date = 19;
+    string finished_date = 20;
+    int32 city_id = 21;
+    int32  confirm_rdb = 22;
+    string overdue_date = 23;
+}
+
+message User {
+    string user_by = 1;
+}
+
+message Reponse {
+    string data = 1;
+}
+
+message Pagination {
+    string limit = 1;
+    string offset = 2;
+    string shortBy = 3;
+    string shortvalue = 4;
+    string query = 5;
+}
+
+service Projects {
+    rpc List(Pagination) returns (Reponse) {}
+    rpc Detail(Project) returns (Reponse) {}
+    rpc Create(Project) returns (Reponse) {}
+}

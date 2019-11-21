@@ -4,14 +4,17 @@ import (
 	"fmt"
 	"os"
 
+	// this package for load mysql
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 )
 
 var (
-	GetDB *gorm.DB // connection about DB
+	// GetDB variable for saving DB
+	GetDB *gorm.DB
 )
 
+// Connect connect to db
 func Connect() {
 	// declare variable to connect db from ENV
 	host := os.Getenv("CONFIGDB_HOST")
