@@ -92,26 +92,27 @@ func (GrpcRoute) Create(data string) []byte {
 }
 
 // Edit function for Update data project
-func (GrpcRoute) Edit(idproject string, data string) []byte {
+func (GrpcRoute) Edit(idproject string, data string) error {
 	var all models.ProjectAll
-	var resp models.Rest
 
 	err := json.Unmarshal([]byte(data), &all)
 	projectModel := models.ProjectModels{}
 
+	if all.Hidden != true {
+		all.Hidden = false
+	}
+	fmt.Println(all)
 	id, _ := strconv.Atoi(idproject)
 	// insert project and get ID project
 	err = projectModel.UpdateProject(id, all.Project)
 	if err != nil {
-
+		return err
 	}
 
 	err = projectModel.UpdateProjectDetail(id, all.ProjectDetail)
 	if err != nil {
-
+		return err
 	}
 
-	resp.Code = 200
-	resp.Message = "Success"
 	return nil
 }

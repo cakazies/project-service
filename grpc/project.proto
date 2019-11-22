@@ -49,4 +49,5 @@ service Projects {
     rpc List(Pagination) returns (Reponse) {}
     rpc Detail(Project) returns (Reponse) {}
     rpc Create(Project) returns (Reponse) {}
+    rpc Edit(Project) returns (Reponse) {}
 }

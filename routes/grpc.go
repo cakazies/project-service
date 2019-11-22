@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"log"
 	"net"
+	"os"
 	ctr "project-service/controllers"
 	rpc "project-service/grpc"
 	"strconv"
@@ -22,7 +23,7 @@ func (ProjectServer) Run() {
 	srv := grpc.NewServer()
 	var garageSrv ProjectServer
 	rpc.RegisterProjectsServer(srv, garageSrv)
-	port := ":6001"
+	port := os.Getenv("APPS_PORT")
 	log.Println("Starting RPC server at", port)
 
 	l, err := net.Listen("tcp", port)
@@ -66,12 +67,19 @@ func (ProjectServer) Detail(ctx context.Context, pro *rpc.Project) (*rpc.Reponse
 
 // Edit function for update data project
 func (ProjectServer) Edit(ctx context.Context, pro *rpc.Project) (*rpc.Reponse, error) {
-	grpc := ctr.GrpcRoute{}
-	data, _ := json.Marshal(pro)
-	id := strconv.Itoa(int(pro.Id))
-	result := grpc.Edit(id, string(data))
 	var resp rpc.Reponse
+	grpc := ctr.GrpcRoute{}
 
-	resp.Data = string(result)
+	id := strconv.Itoa(int(pro.Id))
+	pro.Id = 0
+
+	data, _ := json.Marshal(pro)
+	err := grpc.Edit(id, string(data))
+	if err != nil {
+		log.Println(err)
+		return &resp, err
+	}
+
+	resp.Data = string(data)
 	return &resp, nil
 }
