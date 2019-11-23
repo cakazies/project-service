@@ -48,7 +48,7 @@ func (b *ProjectModels) InsertProject(data Project) (Project, error) {
 }
 
 // UpdateProject function for update project
-func (b *ProjectModels) UpdateProject(id uint, data Project) error {
+func (b *ProjectModels) UpdateProject(id int, data Project) error {
 	err := configs.GetDB.Table(PROJECT).Where("id = ?", id).Updates(&data).Error
 	return err
 }

@@ -20,7 +20,7 @@ func connectRabbit() *amqp.Connection {
 }
 
 // Publish for Channel AMQ return channel
-func Publish(label string, data string) {
+func Publish(label string, data []byte) {
 	conn := connectRabbit()
 	ch, err := conn.Channel()
 	if err != nil {
@@ -47,7 +47,7 @@ func Publish(label string, data string) {
 		amqp.Publishing{
 			DeliveryMode: amqp.Persistent,
 			ContentType:  "text/plain",
-			Body:         []byte(data),
+			Body:         data,
 		})
 
 	if err != nil {
