@@ -64,3 +64,23 @@ func (b *ProjectModels) UpdateProjectDetail(id int, data ProjectDetail) error {
 	err := configs.GetDB.Table(TblProjectDetail).Where("project_id = ?", id).Updates(&data).Error
 	return err
 }
+
+// GetGallery function for get detail project
+func (b *ProjectModels) GetGallery(projectID string) ([]ProjectGallery, error) {
+	result := make([]ProjectGallery, 0)
+
+	err := configs.GetDB.Model(&result).Where("project_id = ?", projectID).Find(&result).Error
+	return result, err
+}
+
+// InsertGallery function for insert project
+func (b *ProjectModels) InsertGallery(data ProjectGallery) error {
+	err := configs.GetDB.Create(&data).Error
+	return err
+}
+
+// UpdateGallery function for update project detail
+func (b *ProjectModels) UpdateGallery(id int, data ProjectGallery) error {
+	err := configs.GetDB.Model(&data).Where("id = ?", id).Updates(&data).Error
+	return err
+}

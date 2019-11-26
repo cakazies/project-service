@@ -16,7 +16,7 @@ type (
 		Cbenefit   string `json:"cbenefit" validate:"required"`
 		Status     string `json:"status" validate:"required"`
 		Scheme     string `json:"scheme" validate:"required"`
-		Hidden     bool   `json:"hidden" validate:"required"`
+		Hidden     string `json:"hidden" validate:"required"`
 		CategoryID int    `json:"category_id" validate:"required"`
 		CreatedBy  int    `json:"created_by" validate:"required"`
 		gorm.Model
@@ -76,11 +76,11 @@ type (
 
 	// ProjectGallery struct for table project gallery
 	ProjectGallery struct {
-		ProjectID   int    `json:"project_id,omitempty"`
-		ImagesURL   string `json:"images_url,omitempty"`
-		Description string `json:"description,omitempty"`
-		Status      int    `json:"status,omitempty"`
-		CreatedBy   int    `json:"created_by,omitempty"`
+		ProjectID   int    `json:"project_id"`
+		ImagesURL   string `json:"images_url"`
+		Description string `json:"description"`
+		Status      int    `json:"status"`
+		CreatedBy   int    `json:"created_by"`
 		gorm.Model
 	}
 
