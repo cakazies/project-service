@@ -3,6 +3,7 @@ package routes
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net"
 	"os"
@@ -76,8 +77,56 @@ func (ProjectServer) Edit(ctx context.Context, pro *rpc.Project) (*rpc.Reponse, 
 	data, _ := json.Marshal(pro)
 	err := grpc.Edit(id, string(data))
 	if err != nil {
-		log.Println(err)
-		return &resp, err
+		return &resp, fmt.Errorf("This ID project %s doesn't exist", id)
+	}
+
+	resp.Data = string(data)
+	return &resp, nil
+}
+
+// ListGallery function for update data project
+func (ProjectServer) ListGallery(ctx context.Context, paging *rpc.Pagination) (*rpc.Reponse, error) {
+	var resp rpc.Reponse
+	grpc := ctr.GrpcRoute{}
+
+	idProject := paging.Params
+	result, err := grpc.GetGallery(idProject)
+	if err != nil {
+		return &resp, fmt.Errorf("This ID project %s doesn't exist", idProject)
+	}
+
+	resp.Data = string(result)
+	return &resp, nil
+}
+
+// CreateGallery function for get all data
+func (ProjectServer) CreateGallery(ctx context.Context, pro *rpc.ProjectGallery) (*rpc.Reponse, error) {
+	var resp rpc.Reponse
+
+	grpc := ctr.GrpcRoute{}
+	data, _ := json.Marshal(pro)
+	result, err := grpc.CreateGallery(string(data))
+
+	if err != nil {
+		return &resp, fmt.Errorf("This ID project %v doesn't exist", pro.ProjectId)
+	}
+
+	resp.Data = string(result)
+	return &resp, nil
+}
+
+// UpdateGallery function for update data project
+func (ProjectServer) UpdateGallery(ctx context.Context, pro *rpc.ProjectGallery) (*rpc.Reponse, error) {
+	var resp rpc.Reponse
+	grpc := ctr.GrpcRoute{}
+
+	id := int(pro.Id)
+	pro.Id = 0
+
+	data, _ := json.Marshal(pro)
+	err := grpc.UpdateGallery(id, string(data))
+	if err != nil {
+		return &resp, fmt.Errorf("This ID project %v doesn't exist", id)
 	}
 
 	resp.Data = string(data)
