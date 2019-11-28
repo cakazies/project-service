@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: project-service
+spec:
+  containers:
+    - name: 003-project-service
+      image: project-service
+      ports:
+        - containerPort: 80
