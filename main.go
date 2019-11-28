@@ -1,10 +1,8 @@
 package main
 
-import (
-	"project-service/routes"
-)
+import "project-service/routes"
 
 func main() {
-	api := routes.ProjectService{}
+	api := routes.ProjectServer{}
 	api.Run()
 }

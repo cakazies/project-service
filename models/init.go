@@ -1,40 +1,45 @@
 package models
 
-import "github.com/jinzhu/gorm"
+import (
+	"github.com/jinzhu/gorm"
+)
 
 type (
+	// Project struct for table project
 	Project struct {
-		Name       string `json:"name,omitempty"`
-		Goal       string `json:"goal,omitempty"`
-		Price      string `json:"price,omitempty"`
-		Risk       string `json:"risk,omitempty"`
-		Duration   string `json:"duration,omitempty"`
-		Rate       string `json:"rate,omitempty"`
-		Cbenefit   string `json:"cbenefit,omitempty"`
-		Status     string `json:"status,omitempty"`
-		Scheme     string `json:"scheme,omitempty"`
-		Hidden     bool   `json:"hidden,omitempty"`
-		CategoryId int    `json:"category_id,omitempty"`
-		CreatedBy  int    `json:"created_by,omitempty"`
+		Name       string `json:"name" validate:"required"`
+		Goal       string `json:"goal" validate:"required"`
+		Price      string `json:"price" validate:"required"`
+		Risk       string `json:"risk" validate:"required"`
+		Duration   string `json:"duration" validate:"required"`
+		Rate       string `json:"rate" validate:"required"`
+		Cbenefit   string `json:"cbenefit" validate:"required"`
+		Status     string `json:"status" validate:"required"`
+		Scheme     string `json:"scheme" validate:"required"`
+		Hidden     string `json:"hidden" validate:"required"`
+		CategoryID int    `json:"category_id" validate:"required"`
+		CreatedBy  int    `json:"created_by" validate:"required"`
 		gorm.Model
 	}
 
+	// ProjectDetail struct for table project detail
 	ProjectDetail struct {
-		ProjectId    int    `json:"project_id,omitempty"`
-		Description  string `json:"description,omitempty"`
-		Address      string `json:"address,omitempty"`
-		StartPeriod  string `json:"start_period,omitempty"`
+		ProjectID    int    `json:"project_id,omitempty"`
+		Description  string `json:"description" validate:"required"`
+		Address      string `json:"address"`
+		StartPeriod  string `json:"start_period" validate:"required"`
 		FailedDate   string `json:"failed_date,omitempty"`
 		OngoingDate  string `json:"ongoing_date,omitempty"`
 		FinishedDate string `json:"finished_date,omitempty"`
-		CityId       int    `json:"city_id,omitempty"`
+		CityID       int    `json:"city_id" validate:"required"`
 		ConfirmRdb   int    `json:"confirm_rdb,omitempty"`
 		OverdueDate  string `json:"overdue_date,omitempty"`
 		gorm.Model
 	}
 
+	// ProjectTImeline struct for table project timeline
 	ProjectTImeline struct {
-		ProjectId   int    `json:"project_id,omitempty"`
+		ProjectID   int    `json:"project_id,omitempty"`
 		Date        string `json:"date,omitempty"`
 		Title       string `json:"title,omitempty"`
 		Description string `json:"description,omitempty"`
@@ -44,14 +49,16 @@ type (
 		gorm.Model
 	}
 
+	// ProjectTimelineGallery struct for table project timeline gallery
 	ProjectTimelineGallery struct {
-		TimelineId int    `json:"timeline_id,omitempty"`
-		ImageUrl   string `json:"image_url,omitempty"`
+		TimelineID int    `json:"timeline_id,omitempty"`
+		ImageURL   string `json:"image_url,omitempty"`
 		gorm.Model
 	}
 
+	// ProjectDocument struct for table project document
 	ProjectDocument struct {
-		ProjectId   int    `json:"project_id,omitempty"`
+		ProjectID   int    `json:"project_id,omitempty"`
 		Title       string `json:"title,omitempty"`
 		Description string `json:"description,omitempty"`
 		Document    string `json:"document,omitempty"`
@@ -59,41 +66,52 @@ type (
 		gorm.Model
 	}
 
+	// ProjectLog struct for table project log
 	ProjectLog struct {
-		ProjectId int    `json:"project_id,omitempty"`
+		ProjectID int    `json:"project_id,omitempty"`
 		Data      string `json:"data,omitempty"`
 		UpdatedBy string `json:"updated_by,omitempty"`
 		gorm.Model
 	}
 
+	// ProjectGallery struct for table project gallery
 	ProjectGallery struct {
-		ProjectId   int    `json:"project_id,omitempty"`
-		ImagesUrl   string `json:"images_url,omitempty"`
-		Description string `json:"description,omitempty"`
-		Status      int    `json:"status,omitempty"`
-		CreatedBy   int    `json:"created_by,omitempty"`
+		ProjectID   int    `json:"project_id"`
+		ImagesURL   string `json:"images_url"`
+		Description string `json:"description"`
+		Status      int    `json:"status"`
+		CreatedBy   int    `json:"created_by"`
 		gorm.Model
 	}
 
+	// Category struct for table category
 	Category struct {
 		Name        string `json:"name,omitempty"`
 		Description string `json:"description,omitempty"`
 		Icon        string `json:"icon,omitempty"`
-		Icon_retina string `json:"icon_retina,omitempty"`
+		IconRetina  string `json:"icon_retina,omitempty"`
 		CreatedBy   int    `json:"created_by,omitempty"`
 		gorm.Model
 	}
 
+	// CategoryTypes struct for table category_types
 	CategoryTypes struct {
-		CategoryId int    `json:"category_id,omitempty"`
+		CategoryID int    `json:"category_id,omitempty"`
 		Name       string `json:"name,omitempty"`
 		CreatedBy  int    `json:"created_by,omitempty"`
 		gorm.Model
 	}
 
+	// Rest struct for response
 	Rest struct {
 		Message string `json:"message,omitempty"`
 		Code    int    `json:"code,omitempty"`
 		Count   int    `json:"count,omitempty"`
+	}
+
+	// ProjectAll struct for getall project
+	ProjectAll struct {
+		Project
+		ProjectDetail
 	}
 )

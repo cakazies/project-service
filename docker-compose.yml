@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  web:
+    container_name: project_service 
+    build: .
+    labels:
+      team: tech
+      version: 1.0.0
+      environment: production
+    depends_on:
+      - db
+    ports:
+      - "8003:8003"
+    volumes:
+      - ./.env:/.env
+  db:
+    image: mysql
+    restart: always
+    container_name: project_service_mysql
+    environment:
+      MYSQL_DATABASE: "project_service"
+      MYSQL_USER: "root"
+      MYSQL_ROOT_PASSWORD: "root"
+    ports:
+      - "3306:3306"
