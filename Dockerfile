@@ -5,7 +5,7 @@ RUN apk update && apk add --no-cache git
 # Create appuser.
 RUN adduser -D -g '' appuser
 
-WORKDIR $GOPATH/src/project-service
+WORKDIR $GOPATH/src/github.com/crowdeco/project-service
 COPY . .
 # Using go get.
 RUN go get

@@ -3,10 +3,11 @@ package middleware
 import (
 	b64 "encoding/base64"
 	"errors"
-	"project-service/models"
-	"project-service/utils"
 	"strings"
 	"time"
+
+	"github.com/crowdeco/project-service/models"
+	"github.com/crowdeco/project-service/utils"
 
 	"github.com/gin-gonic/gin"
 )

@@ -1,6 +1,6 @@
 package main
 
-import "project-service/routes"
+import "github.com/crowdeco/project-service/routes"
 
 func main() {
 	api := routes.ProjectServer{}

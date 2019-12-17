@@ -2,7 +2,8 @@ package models
 
 import (
 	"fmt"
-	"project-service/configs"
+
+	"github.com/crowdeco/project-service/configs"
 )
 
 var (
