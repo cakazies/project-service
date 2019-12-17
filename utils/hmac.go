@@ -9,6 +9,7 @@ import (
 var secretKey = os.Getenv("SECRET_SERVICE")
 var message = os.Getenv("MESSAGE_SERVICE")
 
+// Compare function for compare hmac
 func Compare(messageQ []byte) bool {
 	mac := hmac.New(sha256.New, []byte(secretKey))
 	mac.Write([]byte(message))
@@ -16,6 +17,7 @@ func Compare(messageQ []byte) bool {
 	return hmac.Equal(messageQ, expectedMAC)
 }
 
+// Generate function hmac
 func Generate() string {
 	mac := hmac.New(sha256.New, []byte(secretKey))
 	mac.Write([]byte(message))

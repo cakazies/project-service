@@ -1,9 +1,13 @@
 version: '3'
 
 services:
-  web:
+  apps:
     container_name: project_service 
     build: .
+    labels:
+      team: tech
+      version: 1.0.0
+      environment: development
     depends_on:
       - db
     ports:

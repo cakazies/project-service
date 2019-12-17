@@ -7,9 +7,10 @@ import (
 	"log"
 	"net"
 	"os"
-	ctr "project-service/controllers"
-	rpc "project-service/grpc"
 	"strconv"
+
+	ctr "github.com/crowdeco/project-service/controllers"
+	rpc "github.com/crowdeco/project-service/grpc"
 
 	"google.golang.org/grpc"
 )

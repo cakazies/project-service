@@ -4,11 +4,12 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"project-service/configs"
-	rpc "project-service/grpc"
-	"project-service/models"
 	"strconv"
 	"time"
+
+	"github.com/crowdeco/project-service/configs"
+	rpc "github.com/crowdeco/project-service/grpc"
+	"github.com/crowdeco/project-service/models"
 
 	"gopkg.in/go-playground/validator.v9"
 )
