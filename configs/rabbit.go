@@ -51,6 +51,6 @@ func Publish(label string, data []byte) {
 		})
 
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 }
