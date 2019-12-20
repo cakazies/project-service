@@ -7,9 +7,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/crowdeco/project-service/configs"
-	rpc "github.com/crowdeco/project-service/grpc"
-	"github.com/crowdeco/project-service/models"
+	"github.com/cakazies/project-service/configs"
+	rpc "github.com/cakazies/project-service/grpc"
+	"github.com/cakazies/project-service/models"
 
 	"gopkg.in/go-playground/validator.v9"
 )

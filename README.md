@@ -38,8 +38,8 @@ run Testing with this command
 ## Run Local
 
 - Run `go run main.go`
-  
+
 ## Run Docker
 
 - build docker `docker build -t project-service-img .`
-- Run `docker run -it --rm --name cont-project-service project-service`
+- Run `docker run -it --rm --name cont-project-service project-service-img`

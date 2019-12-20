@@ -1,6 +1,6 @@
 package models
 
-import "github.com/crowdeco/project-service/configs"
+import "github.com/cakazies/project-service/configs"
 
 type (
 	// CatgoryModel struct for this setting class
