@@ -37,7 +37,7 @@ func Publish(label string, data []byte) {
 		nil,   // arguments
 	)
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 	err = ch.Publish(
 		"",     // exchange

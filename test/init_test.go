@@ -3,7 +3,7 @@ package test
 import (
 	"log"
 
-	project "github.com/crowdeco/project-service/grpc"
+	project "github.com/cakazies/project-service/grpc"
 
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"

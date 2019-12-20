@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"testing"
 
-	project "github.com/crowdeco/project-service/grpc"
+	project "github.com/cakazies/project-service/grpc"
 )
 
 var (

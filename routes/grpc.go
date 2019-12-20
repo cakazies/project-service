@@ -9,8 +9,8 @@ import (
 	"os"
 	"strconv"
 
-	ctr "github.com/crowdeco/project-service/controllers"
-	rpc "github.com/crowdeco/project-service/grpc"
+	ctr "github.com/cakazies/project-service/controllers"
+	rpc "github.com/cakazies/project-service/grpc"
 
 	"google.golang.org/grpc"
 )
