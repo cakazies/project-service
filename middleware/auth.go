@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/crowdeco/project-service/models"
-	"github.com/crowdeco/project-service/utils"
+	"github.com/cakazies/project-service/models"
+	"github.com/cakazies/project-service/utils"
 
 	"github.com/gin-gonic/gin"
 )
