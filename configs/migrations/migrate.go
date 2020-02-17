@@ -3,8 +3,8 @@ package migrations
 import (
 	"log"
 
-	"github.com/crowdeco/project-service/configs"
-	"github.com/crowdeco/project-service/models"
+	"github.com/cakazies/project-service/configs"
+	"github.com/cakazies/project-service/models"
 )
 
 func main() {
