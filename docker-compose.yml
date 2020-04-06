@@ -2,7 +2,7 @@ version: '3'
 
 services:
   apps:
-    container_name: project_service 
+    container_name: project_service
     build: .
     labels:
       team: tech
@@ -18,7 +18,7 @@ services:
     image: mysql
     restart: always
     container_name: project_service_mysql
-    environment:
+    environment: 
       MYSQL_DATABASE: "project_service"
       MYSQL_USER: "root"
       MYSQL_ROOT_PASSWORD: "root"
